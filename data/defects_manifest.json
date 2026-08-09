@@ -1,0 +1,144 @@
+{
+  "seed": 42,
+  "generated_at": "2026-08-08T19:03:20",
+  "defects": {
+    "missing_in_erp": {
+      "description": "CRM opportunity marked Closed Won with no corresponding ERP GL entry.",
+      "count": 15,
+      "txn_uids": [
+        299,
+        319,
+        366,
+        394,
+        651,
+        1128,
+        1352,
+        1452,
+        1584,
+        1877,
+        2105,
+        2271,
+        2350,
+        2399,
+        2642
+      ]
+    },
+    "timing": {
+      "description": "Billing invoice dated one month after the ERP posting period.",
+      "count": 30,
+      "txn_uids": [
+        47,
+        262,
+        398,
+        409,
+        429,
+        445,
+        477,
+        609,
+        629,
+        799,
+        821,
+        927,
+        1078,
+        1100,
+        1198,
+        1333,
+        1582,
+        1707,
+        1791,
+        1944,
+        2057,
+        2137,
+        2144,
+        2247,
+        2436,
+        2439,
+        2542,
+        2604,
+        2678,
+        2715
+      ]
+    },
+    "fx_variance": {
+      "description": "Billing applied the prior month's FX rate, so USD value diverges from ERP.",
+      "count": 12,
+      "txn_uids": [
+        208,
+        426,
+        1172,
+        1251,
+        1491,
+        1517,
+        1903,
+        1918,
+        2216,
+        2220,
+        2289,
+        2666
+      ]
+    },
+    "duplicate_customer": {
+      "description": "Same legal entity present twice in CRM under a spelling variant.",
+      "count": 8,
+      "pairs": {
+        "ACC-00006": {
+          "duplicate_account_id": "ACC-D0001",
+          "original_name": "Blair PLC",
+          "duplicate_name": "Blair PLC Ltd"
+        },
+        "ACC-00027": {
+          "duplicate_account_id": "ACC-D0002",
+          "original_name": "Wright Inc",
+          "duplicate_name": "Wright Inc."
+        },
+        "ACC-00058": {
+          "duplicate_account_id": "ACC-D0003",
+          "original_name": "Bailey-Hoover",
+          "duplicate_name": "Bailey-Hoover"
+        },
+        "ACC-00040": {
+          "duplicate_account_id": "ACC-D0004",
+          "original_name": "Miller, Lopez and Larson",
+          "duplicate_name": "Miller, Lopez & Larson"
+        },
+        "ACC-00037": {
+          "duplicate_account_id": "ACC-D0005",
+          "original_name": "Mitchell-Horton",
+          "duplicate_name": "Mitchell-Horton"
+        },
+        "ACC-00051": {
+          "duplicate_account_id": "ACC-D0006",
+          "original_name": "Smith, Jones and Ware",
+          "duplicate_name": "Smith, Jones & Ware"
+        },
+        "ACC-00043": {
+          "duplicate_account_id": "ACC-D0007",
+          "original_name": "Bryant-Hickman",
+          "duplicate_name": "Bryant-Hickman"
+        },
+        "ACC-00020": {
+          "duplicate_account_id": "ACC-D0008",
+          "original_name": "Romero Inc",
+          "duplicate_name": "Romero Inc."
+        }
+      }
+    },
+    "budget_overrun": {
+      "description": "Real operational overrun: actuals exceed budget by ~40%.",
+      "cost_center_id": 102,
+      "period_month": "2024-08-01",
+      "multiplier": 1.4
+    }
+  },
+  "row_counts": {
+    "erp.cost_centers": 8,
+    "erp.customers": 60,
+    "crm.accounts": 68,
+    "crm.opportunities": 2866,
+    "erp.gl_entries": 2851,
+    "erp.budget": 479,
+    "billing.fx_rates": 168,
+    "billing.invoices": 2866,
+    "billing.invoice_lines": 2866
+  }
+}
