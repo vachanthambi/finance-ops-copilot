@@ -1,6 +1,6 @@
 {
   "seed": 42,
-  "generated_at": "2026-08-08T19:03:20",
+  "generated_at": "2026-08-09T03:55:37",
   "defects": {
     "missing_in_erp": {
       "description": "CRM opportunity marked Closed Won with no corresponding ERP GL entry.",
@@ -63,18 +63,18 @@
       "description": "Billing applied the prior month's FX rate, so USD value diverges from ERP.",
       "count": 12,
       "txn_uids": [
-        208,
-        426,
-        1172,
-        1251,
-        1491,
-        1517,
-        1903,
-        1918,
-        2216,
-        2220,
-        2289,
-        2666
+        324,
+        661,
+        900,
+        1045,
+        1478,
+        1842,
+        1866,
+        1888,
+        1988,
+        2108,
+        2135,
+        2587
       ]
     },
     "duplicate_customer": {

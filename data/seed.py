@@ -257,9 +257,14 @@ def plant_defects(txns, accounts, months):
         "txn_uids": sorted(timing_uids),
     }
 
-    # 3. wrong month's FX rate applied at invoicing
+    # 3. wrong month's FX rate applied at invoicing.
+    #    Only sample where the defect is observable: USD is pegged at 1.0 in
+    #    every month, and the first month has no prior month to draw a stale
+    #    rate from. Either case would record a defect that was never written.
     remaining = remaining[~remaining["txn_uid"].isin(timing_uids)]
-    fxbad = remaining.sample(DEFECT_COUNTS["fx_variance"], random_state=SEED + 2)
+    fx_eligible = remaining[(remaining["currency_code"] != "USD")
+                            & (remaining["period_month"] > months[0])]
+    fxbad = fx_eligible.sample(DEFECT_COUNTS["fx_variance"], random_state=SEED + 2)
     fx_uids = set(fxbad["txn_uid"])
     manifest["defects"]["fx_variance"] = {
         "description": "Billing applied the prior month's FX rate, so USD value diverges from ERP.",
@@ -346,8 +351,7 @@ def write_crm(txns, accounts, dup_map):
     return pd.DataFrame(acc_rows), pd.DataFrame(opp_rows)
 
 
-def write_erp(txns, accounts, cost_centers, missing_uids,
-              overrun_cc, overrun_month):
+def write_erp(txns, accounts, cost_centers, missing_uids):
     cust_rows = [{
         "customer_id": a.customer_id,
         "customer_name": a.account_name,
@@ -360,11 +364,6 @@ def write_erp(txns, accounts, cost_centers, missing_uids,
     for t in txns.itertuples():
         if t.txn_uid in missing_uids:
             continue
-        amount = float(t.amount_usd)
-        qty = t.quantity
-        if t.cost_center_id == overrun_cc and t.period_month == overrun_month:
-            amount = round(amount * OVERRUN_MULTIPLIER, 2)
-            qty = int(qty * OVERRUN_MULTIPLIER)
         gl_rows.append({
             "customer_id": t.customer_id,
             "cost_center_id": t.cost_center_id,
@@ -373,9 +372,9 @@ def write_erp(txns, accounts, cost_centers, missing_uids,
             "posting_date": t.txn_date,
             "period_month": t.period_month,
             "product_line": t.product_line,
-            "quantity": qty,
+            "quantity": t.quantity,
             "unit_price_usd": t.unit_price_usd,
-            "amount_usd": amount,
+            "amount_usd": float(t.amount_usd),
             "source_doc": f"OPP-{t.txn_uid:07d}",
         })
 
@@ -492,13 +491,22 @@ def main():
     (manifest, missing_uids, timing_uids, fx_uids,
      dup_map, overrun_cc, overrun_month) = plant_defects(txns, accounts, months)
 
+    # A real overrun is an operational event, not a data error: the company
+    # genuinely sold more. It must therefore be visible in all three systems,
+    # so scale the canonical transactions before any of them are written.
+    mask = ((txns["cost_center_id"] == overrun_cc)
+            & (txns["period_month"] == overrun_month))
+    txns.loc[mask, "quantity"] = (
+        txns.loc[mask, "quantity"] * OVERRUN_MULTIPLIER).astype(int)
+    for col in ["amount_usd", "amount_local"]:
+        txns.loc[mask, col] = (txns.loc[mask, col] * OVERRUN_MULTIPLIER).round(2)
+    print(f"  scaled {int(mask.sum())} transactions for the overrun event")
+
     print("Writing CRM...")
     crm_accounts, crm_opps = write_crm(txns, accounts, dup_map)
 
     print("Writing ERP...")
-    erp_customers, erp_gl = write_erp(
-        txns, accounts, cost_centers, missing_uids, overrun_cc, overrun_month
-    )
+    erp_customers, erp_gl = write_erp(txns, accounts, cost_centers, missing_uids)
     erp_budget = build_budget(erp_gl, cost_centers, overrun_cc, overrun_month)
 
     print("Writing Billing...")
