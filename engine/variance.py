@@ -52,13 +52,21 @@ def get_engine():
     return create_engine(url)
 
 
+_currency_cache: dict | None = None
+
+
 def load_currency_map(engine) -> dict:
     """
     customer_id -> currency_code.
 
     The ledger is USD-only, so the trading currency has to come from CRM via
-    the resolved identity map.
+    the resolved identity map. Cached for the life of the process: entity
+    resolution is the slowest step here and the mapping cannot change mid-run.
     """
+    global _currency_cache
+    if _currency_cache is not None:
+        return _currency_cache
+
     crm_accounts = pd.read_sql(text("SELECT * FROM crm.accounts"), engine)
     erp_customers = pd.read_sql(text("SELECT * FROM erp.customers"), engine)
     invoices = pd.read_sql(
@@ -70,7 +78,10 @@ def load_currency_map(engine) -> dict:
         crm_accounts[["account_id", "currency_code"]], on="account_id")
     mapped = mapped[mapped["customer_id"].notna()]
     mapped = mapped.drop_duplicates("customer_id")
-    return dict(zip(mapped["customer_id"].astype(int), mapped["currency_code"]))
+
+    _currency_cache = dict(zip(mapped["customer_id"].astype(int),
+                               mapped["currency_code"]))
+    return _currency_cache
 
 
 def load_actuals(engine, currency_map: dict) -> pd.DataFrame:
@@ -257,8 +268,18 @@ def run_variance(engine=None, period_month=None, region=None,
     return {"detail": detail, "bridge": bridge, "by_product": by_product}
 
 
-def top_variance_periods(engine=None, n=5) -> pd.DataFrame:
-    """Cost centre / month combinations with the largest percentage gap."""
+def top_variance_periods(engine=None, n=5, sort_by="usd",
+                         direction="both") -> pd.DataFrame:
+    """
+    Rank cost centre / month combinations by size of variance.
+
+    sort_by    'usd' for absolute dollars, 'pct' for percentage of budget.
+    direction  'unfavourable' (shortfalls), 'favourable' (beats), or 'both'.
+
+    Both axes matter and they disagree: a small centre can post the worst
+    percentage while a large one posts the worst dollar gap. Ranking on one and
+    answering as though it were the other is how you report the wrong period.
+    """
     result = run_variance(engine)
     d = result["detail"]
     agg = (d.groupby(["cost_center_id", "period_month"], as_index=False)
@@ -271,8 +292,15 @@ def top_variance_periods(engine=None, n=5) -> pd.DataFrame:
     agg["total_variance"] = agg["actual"] - agg["budget"]
     agg["variance_pct"] = np.where(agg["budget"] != 0,
                                    agg["total_variance"] / agg["budget"] * 100, 0)
-    return agg.reindex(agg["variance_pct"].abs().sort_values(
-        ascending=False).index).head(n)
+
+    if direction == "unfavourable":
+        agg = agg[agg["total_variance"] < 0]
+    elif direction == "favourable":
+        agg = agg[agg["total_variance"] > 0]
+
+    key = "total_variance" if sort_by == "usd" else "variance_pct"
+    order = agg[key].abs().sort_values(ascending=False).index
+    return agg.reindex(order).head(n)
 
 
 if __name__ == "__main__":
@@ -290,5 +318,10 @@ if __name__ == "__main__":
     print(f"  Total variance  {b['total_variance']:>16,.0f} "
           f"({b['variance_pct']:+.1f}%)")
 
-    print("\nLargest variances by cost centre and month")
-    print(top_variance_periods(eng).to_string(index=False))
+    print("\nLargest shortfalls by absolute USD")
+    print(top_variance_periods(eng, sort_by="usd",
+                               direction="unfavourable").to_string(index=False))
+
+    print("\nLargest shortfalls by percentage of budget")
+    print(top_variance_periods(eng, sort_by="pct",
+                               direction="unfavourable").to_string(index=False))
