@@ -1,0 +1,374 @@
+{
+  "summary": {
+    "generated_at": "2026-08-09T20:21:42",
+    "questions": 6,
+    "repeats": 2,
+    "runs": 12,
+    "runs_completed": 12,
+    "figure_accuracy_pct": 75.0,
+    "questions_compared": 6,
+    "headline_stable_questions": 3,
+    "headline_stability_pct": 50.0,
+    "mean_figure_overlap_pct": 61.1,
+    "errors": 0,
+    "mean_seconds": 56.8,
+    "mean_sql_calls": 0.5
+  },
+  "runs": [
+    {
+      "question_id": "largest_usd_shortfall",
+      "question": "Ranking by absolute USD, which single cost centre and month had the largest unfavourable variance across the whole dataset? Give the total variance and each of the four drivers in dollars.",
+      "answer": "Automated commentary could not be verified against the underlying figures, so the verified findings are shown directly.\n\nPersona: Finance Leader\n\nVARIANCE ANALYSIS:\n\nCost centre 102 in October 2023 had the largest unfavourable variance in absolute USD across the entire dataset.\n\nTotal variance: -$170,897\n\nDriver breakdown:\n- Volume: -$156,036\n- Mix: -$14,213\n- Price: -$59,207\n- FX: +$58,559",
+      "error": null,
+      "elapsed_s": 35.0,
+      "agents": [
+        "orchestrator",
+        "variance",
+        "commentary",
+        "validator"
+      ],
+      "sql_count": 0,
+      "validated": false,
+      "unsupported": [],
+      "percentages": [],
+      "figures": [
+        170900.0,
+        156000.0,
+        59200.0
+      ],
+      "all_figures": [
+        2000.0,
+        14200.0,
+        58600.0,
+        59200.0,
+        156000.0,
+        170900.0
+      ]
+    },
+    {
+      "question_id": "largest_usd_shortfall",
+      "question": "Ranking by absolute USD, which single cost centre and month had the largest unfavourable variance across the whole dataset? Give the total variance and each of the four drivers in dollars.",
+      "answer": "Cost Centre 102 missed its October 2023 revenue plan by $170,897, the largest single shortfall in the dataset. Volume drove the miss at -$156,036, with unfavourable mix adding another -$14,213. Pricing pressure cost an additional -$59,207, partially offset by a favourable FX tailwind of +$58,559.\n\nThe volume shortfall represents the core issue\u2014units simply didn't materialize as planned. The pricing variance suggests either discounting to move what volume did exist or a shift toward lower-priced offerings within the same product categories. The mix variance indicates customers bought a different composition of products than forecasted, skewing toward lower-margin items.\n\nImmediate action should focus on understanding what caused the volume collapse in October: demand deterioration, supply constraints, or execution failures. The pricing variance warrants a review of discount approvals and deal structures for that month. If this pattern persists beyond October, Cost Centre 102 needs a revised forecast and potentially a restructured plan for the remainder of the year.",
+      "error": null,
+      "elapsed_s": 37.4,
+      "agents": [
+        "orchestrator",
+        "variance",
+        "commentary",
+        "validator"
+      ],
+      "sql_count": 0,
+      "validated": true,
+      "unsupported": [],
+      "percentages": [],
+      "figures": [
+        170900.0,
+        156000.0,
+        59200.0
+      ],
+      "all_figures": [
+        2000.0,
+        14200.0,
+        58600.0,
+        59200.0,
+        156000.0,
+        170900.0
+      ]
+    },
+    {
+      "question_id": "largest_beat",
+      "question": "Ranking by absolute USD, which single cost centre and month had the largest favourable variance across the whole dataset? Give the total variance and each of the four drivers in dollars.",
+      "answer": "Cost Centre 102 delivered a $1.98 million revenue beat in August 2024, the single largest favorable variance in the dataset. Volume drove nearly all of it at $1.99 million, with pricing adding another $211k. Currency headwinds cost $213k, while mix was immaterial.\n\nThis is a clean operational win\u2014units sold well above plan at slightly better pricing. The FX drag is a translation effect, not a performance issue, and doesn't diminish the underlying result. Volume of this magnitude suggests either market share gains or demand strength that wasn't in the budget.\n\nConfirm whether this reflects sustainable demand or a one-time event, and assess whether the capacity and working capital assumptions underpinning the rest of the year still hold. If this is the new run rate, the full-year forecast needs updating.",
+      "error": null,
+      "elapsed_s": 28.2,
+      "agents": [
+        "orchestrator",
+        "variance",
+        "commentary",
+        "validator"
+      ],
+      "sql_count": 0,
+      "validated": true,
+      "unsupported": [],
+      "percentages": [],
+      "figures": [
+        1990000.0,
+        1980000.0,
+        213000.0
+      ],
+      "all_figures": [
+        2000.0,
+        211000.0,
+        213000.0,
+        1980000.0,
+        1990000.0
+      ]
+    },
+    {
+      "question_id": "largest_beat",
+      "question": "Ranking by absolute USD, which single cost centre and month had the largest favourable variance across the whole dataset? Give the total variance and each of the four drivers in dollars.",
+      "answer": "Cost Centre 102 delivered a $1.98 million revenue beat in August 2024, the single largest favorable variance in the dataset. Volume drove nearly all of it at $1.99 million, with pricing adding another $211k. Mix was negligible at $56, and foreign exchange headwinds cost $213k.\n\nThis is a clean volume story\u2014units sold well above budget with pricing discipline intact. The FX drag is a translation effect, not an operational issue, and doesn't diminish the underlying performance. The cost centre exceeded plan by selling more at stable or better pricing.\n\nFor the CFO: this beat flows straight to the bottom line if variable costs stayed in line with budget assumptions. Confirm gross margin held, then recognize the upside in the forecast. If this volume level is sustainable, August sets a new run rate for the year.",
+      "error": null,
+      "elapsed_s": 27.9,
+      "agents": [
+        "orchestrator",
+        "variance",
+        "commentary",
+        "validator"
+      ],
+      "sql_count": 0,
+      "validated": true,
+      "unsupported": [],
+      "percentages": [],
+      "figures": [
+        1990000.0,
+        1980000.0,
+        213000.0
+      ],
+      "all_figures": [
+        2000.0,
+        211000.0,
+        213000.0,
+        1980000.0,
+        1990000.0
+      ]
+    },
+    {
+      "question_id": "recon_summary",
+      "question": "Across the entire dataset, give the count and total USD value of reconciliation breaks for every break type.",
+      "answer": "You have $1.6M in closed deals that never made it to the ledger. Fifteen transactions show revenue in CRM with no corresponding ERP entry\u2014this is unbilled or unrecorded revenue that should have hit the P&L. Pull the transaction list from the reconciliation engine and work with Revenue Accounting to get these posted or written off if they're uncollectible.\n\nThe $3.2M in timing breaks is a different animal. Thirty transactions posted to periods other than when they were invoiced\u2014this distorts monthly comparisons but doesn't change the annual number. If you're explaining a monthly variance to the CFO and timing breaks sit in that same month, they're part of the story. Otherwise, they're a close process issue, not a revenue problem.\n\nFX variances are $6,700 across twelve transactions and duplicate customer records carry no dollar impact. Neither moves the needle. The missing ERP entries are your exposure.",
+      "error": null,
+      "elapsed_s": 30.6,
+      "agents": [
+        "orchestrator",
+        "reconciliation",
+        "commentary",
+        "validator"
+      ],
+      "sql_count": 0,
+      "validated": true,
+      "unsupported": [],
+      "percentages": [],
+      "figures": [
+        3200000.0,
+        1600000.0,
+        6700.0
+      ],
+      "all_figures": [
+        6700.0,
+        1600000.0,
+        3200000.0
+      ]
+    },
+    {
+      "question_id": "recon_summary",
+      "question": "Across the entire dataset, give the count and total USD value of reconciliation breaks for every break type.",
+      "answer": "You have $1.6 million in closed deals that never made it to the ledger. Fifteen transactions show revenue in CRM with no corresponding ERP entry\u2014this is unbilled or unrecorded revenue that belongs in your financials. Pull the transaction list from the reconciliation engine and get Billing to post these invoices immediately.\n\nThe $3.2 million in timing breaks is a reporting issue, not a revenue leak. Thirty transactions posted to different periods than they were invoiced, which distorts period-over-period comparisons but doesn't change total recognized revenue. If these are material to any single month's results, Finance should review the timing policy with Revenue Accounting to tighten period cutoffs.\n\nThe remaining breaks are immaterial. FX variances total $6,700 across twelve transactions\u2014rounding differences from non-standard rates. Eight duplicate customer records carry no dollar impact and can be cleaned up in the master data file when convenient. No unexplained breaks means the reconciliation is complete.",
+      "error": null,
+      "elapsed_s": 31.5,
+      "agents": [
+        "orchestrator",
+        "reconciliation",
+        "commentary",
+        "validator"
+      ],
+      "sql_count": 0,
+      "validated": true,
+      "unsupported": [],
+      "percentages": [],
+      "figures": [
+        3200000.0,
+        1600000.0,
+        6700.0
+      ],
+      "all_figures": [
+        6700.0,
+        1600000.0,
+        3200000.0
+      ]
+    },
+    {
+      "question_id": "fx_impact",
+      "question": "Across the entire dataset, what is the total FX component of the budget-to-actual bridge in USD, and what are the total budget and total actual?",
+      "answer": "The company beat budget by $999,901.00, driven almost entirely by operational performance. Foreign exchange was a negligible headwind of $1,050.10 against total actual revenue of $218,738,365.82.\n\nFX is not material to this result. The variance is explained by factors other than currency movements\u2014likely volume, price, or mix effects that more than offset the minor FX drag. No currency hedging action is warranted based on these figures.\n\nReport the beat to the CFO as an operational win. The budget of $217,738,464.82 was exceeded through business performance, not currency tailwinds, which makes the result more sustainable going forward.",
+      "error": null,
+      "elapsed_s": 130.3,
+      "agents": [
+        "orchestrator",
+        "variance",
+        "retrieval",
+        "commentary",
+        "validator"
+      ],
+      "sql_count": 1,
+      "validated": true,
+      "unsupported": [],
+      "percentages": [],
+      "figures": [
+        218738400.0,
+        217738500.0,
+        999900.0
+      ],
+      "all_figures": [
+        1100.0,
+        999900.0,
+        217738500.0,
+        218738400.0
+      ]
+    },
+    {
+      "question_id": "fx_impact",
+      "question": "Across the entire dataset, what is the total FX component of the budget-to-actual bridge in USD, and what are the total budget and total actual?",
+      "answer": "Automated commentary could not be verified against the underlying figures, so the verified findings are shown directly.\n\nPersona: Finance Leader\n\nTOTAL BUDGET AND ACTUAL ACROSS ENTIRE DATASET:\n- Total Budget: $275,458,921.43 USD\n- Total Actual: $278,988,286.31 USD\n- Total Variance: $3,529,364.88 USD (favorable - actual exceeded budget)\n\nFX COMPONENT BY COST CENTER (2023-2024):\n\nCost Center 100 (NA Sales, NA region):\n- Total FX Component: $0.00 USD\n- All transactions in USD (base currency), no currency conversion required\n\nCost Center 102 (EMEA Sales, EMEA region):\n- Total FX Component: -$1,932,486 USD (unfavorable)\n- 2023: -$1,098,194 USD\n- 2024: -$834,292 USD\n\nCost Center 104 (APAC Sales, APAC region):\n- Total FX Component: $1,074,147 USD (favorable)\n- 2023: $1,020,516 USD\n- 2024: $53,631 USD\n\nCost Center 106 (LATAM Sales, LATAM region):\n- Total FX Component: -$481,490 USD (unfavorable)\n- 2023: -$299,759 USD\n- 2024: -$181,731 USD\n\nTOTAL FX COMPONENT ACROSS ENTIRE DATASET:\n$0 + (-$1,932,486) + $1,074,147 + (-$481,490) = -$1,339,829 USD (unfavorable)",
+      "error": null,
+      "elapsed_s": 246.6,
+      "agents": [
+        "orchestrator",
+        "variance",
+        "retrieval",
+        "commentary",
+        "validator"
+      ],
+      "sql_count": 3,
+      "validated": false,
+      "unsupported": [],
+      "percentages": [],
+      "figures": [
+        278988300.0,
+        275458900.0,
+        3529400.0
+      ],
+      "all_figures": [
+        2000.0,
+        53600.0,
+        181700.0,
+        299800.0,
+        481500.0,
+        834300.0,
+        1020500.0,
+        1074100.0,
+        1098200.0,
+        1339800.0,
+        1932500.0,
+        3529400.0,
+        275458900.0,
+        278988300.0
+      ]
+    },
+    {
+      "question_id": "missing_revenue",
+      "question": "Across the entire dataset, how many transactions closed in CRM never reached the general ledger, and what is their total USD value?",
+      "answer": "We have $1.6 million in closed deals that never made it to the general ledger. Fifteen opportunities show as closed-won in CRM but have no corresponding revenue entry in the ERP, meaning we've told the business we won this revenue but haven't actually recognized it in our books.\n\nThis is a revenue recognition gap, not a timing issue. These aren't late invoices or pending approvals\u2014they're transactions that fell through the handoff between systems. The Barrera-Martin Professional Services deal from March 2023 is typical: marked closed in CRM, never posted to GL. If these deals were legitimately won, we're understating revenue. If they weren't, our CRM close rates are inflated and pipeline forecasts are unreliable.\n\nFinance needs to investigate each transaction to determine whether revenue should be recognized retroactively or whether these CRM records should be reversed. This also points to a broken process between Sales and Finance\u2014closed opportunities must trigger GL entries automatically, or we need manual controls to catch the exceptions. The CFO should know we have a $1.6 million reconciliation item that affects both reported revenue and forecast accuracy.",
+      "error": null,
+      "elapsed_s": 27.0,
+      "agents": [
+        "orchestrator",
+        "reconciliation",
+        "commentary",
+        "validator"
+      ],
+      "sql_count": 0,
+      "validated": true,
+      "unsupported": [],
+      "percentages": [],
+      "figures": [
+        1600000.0,
+        2000.0
+      ],
+      "all_figures": [
+        2000.0,
+        1600000.0
+      ]
+    },
+    {
+      "question_id": "missing_revenue",
+      "question": "Across the entire dataset, how many transactions closed in CRM never reached the general ledger, and what is their total USD value?",
+      "answer": "We have $1.6 million in closed deals that never made it to the general ledger. Fifteen transactions spanning March 2023 through November 2024 are sitting in CRM as closed-won but were never posted to the ERP, creating a material revenue recognition gap that needs immediate attention.\n\nThe exposure cuts across all major product lines\u2014Professional Services, Managed Services, Security, Cloud Voice, and Connectivity\u2014with individual transactions ranging from $3,129 to $286,596. This isn't a single-team problem or a one-time miss; it's a systemic breakdown in the CRM-to-ERP handoff that's been bleeding revenue for nearly two years.\n\nDirect finance operations to pull the full transaction list and work with revenue accounting to determine which periods these deals should have hit. For any transactions in open periods, get them posted immediately. For closed periods, assess whether restatement is required or if the amounts can be absorbed in current-period adjustments. Then fix the integration\u2014whether that's a broken API, a manual step that's being skipped, or a status mapping issue, this gap cannot continue.",
+      "error": null,
+      "elapsed_s": 29.8,
+      "agents": [
+        "orchestrator",
+        "reconciliation",
+        "commentary",
+        "validator"
+      ],
+      "sql_count": 0,
+      "validated": true,
+      "unsupported": [],
+      "percentages": [],
+      "figures": [
+        1600000.0,
+        286600.0,
+        3100.0
+      ],
+      "all_figures": [
+        2000.0,
+        3100.0,
+        286600.0,
+        1600000.0
+      ]
+    },
+    {
+      "question_id": "product_ranking",
+      "question": "Across the entire dataset, rank all product lines by total revenue in erp.gl_entries, highest first, with the USD total for each.",
+      "answer": "Security leads our product portfolio at $57.9M in total revenue, narrowly ahead of Cloud Voice at $57.3M. The remaining three lines\u2014Connectivity ($56.3M), Managed Services ($53.8M), and Professional Services ($53.7M)\u2014cluster tightly below, creating a remarkably balanced revenue distribution across all five product lines totaling $279M.\n\nThis balance presents both opportunity and risk. No single product line dominates P&L performance, which limits concentration risk but also means no clear growth engine is pulling the business forward. The tight clustering suggests we're either executing a deliberate portfolio strategy or spreading resources too thin to achieve breakout performance in any category.\n\nFrom a CFO perspective, this warrants a strategic review of capital allocation. If Security and Cloud Voice represent our highest-margin or fastest-growing segments, we should consider concentrating investment there rather than maintaining parity across all lines. Conversely, if margins vary significantly, the revenue ranking may not reflect profit contribution\u2014verify gross margin by product line before making portfolio decisions.",
+      "error": null,
+      "elapsed_s": 23.3,
+      "agents": [
+        "orchestrator",
+        "retrieval",
+        "commentary",
+        "validator"
+      ],
+      "sql_count": 1,
+      "validated": true,
+      "unsupported": [],
+      "percentages": [],
+      "figures": [
+        279000000.0,
+        57900000.0,
+        57300000.0
+      ],
+      "all_figures": [
+        53700000.0,
+        53800000.0,
+        56300000.0,
+        57300000.0,
+        57900000.0,
+        279000000.0
+      ]
+    },
+    {
+      "question_id": "product_ranking",
+      "question": "Across the entire dataset, rank all product lines by total revenue in erp.gl_entries, highest first, with the USD total for each.",
+      "answer": "Automated commentary could not be verified against the underlying figures, so the verified findings are shown directly.\n\nPersona: Finance Leader\n\n**Product Line Revenue Ranking (ERP General Ledger)**\n\n| Rank | Product Line | Total Revenue (USD) |\n|------|--------------|---------------------|\n| 1 | Security | $57,937,615.92 |\n| 2 | Cloud Voice | $57,258,859.56 |\n| 3 | Connectivity | $56,311,785.22 |\n| 4 | Managed Services | $53,764,927.05 |\n| 5 | Professional Services | $53,715,098.56 |\n\n**Summary:** Security is the highest revenue product line at $57.9M, followed closely by Cloud Voice at $57.3M. The five product lines are relatively balanced, with total revenue across all lines of approximately $278.99M.",
+      "error": null,
+      "elapsed_s": 33.4,
+      "agents": [
+        "orchestrator",
+        "retrieval",
+        "commentary",
+        "validator"
+      ],
+      "sql_count": 1,
+      "validated": false,
+      "unsupported": [],
+      "percentages": [],
+      "figures": [
+        278990000.0,
+        57937600.0,
+        57900000.0
+      ],
+      "all_figures": [
+        53715100.0,
+        53764900.0,
+        56311800.0,
+        57258900.0,
+        57300000.0,
+        57900000.0,
+        57937600.0,
+        278990000.0
+      ]
+    }
+  ]
+}
